@@ -10,11 +10,14 @@ def main ( ) :
     print ("\n\n\n\n")
 
 
+    # Establecer conexión.
     client = mqtt.Client()
     client.connect("localhost", 1883)
     
-    # Publish a message to a topic
+    # Enviar mensaje por medio de un tópico.
     client.publish("mytopic", "Hello, MQTT!")
+
+    # Establecer desconexión.
     client.disconnect()
     
     function_01()

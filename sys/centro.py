@@ -1,10 +1,12 @@
 
-# IMPORTS
+# IMPORTACIONES #
 import paho.mqtt.client as mqtt
 
 
 
-# MAIN FUNCTION DECLARATION
+#
+# DECLARACIÓN DE CENTRO DE COMANDO #
+#
 def main ( ) :
 
     print ("\n\n\n\n")
@@ -12,33 +14,44 @@ def main ( ) :
 
     # Establecer conexión.
     client = mqtt.Client()
-    client.connect("localhost", 1883)
+    client.connect ( "localhost", 1883)
 
     # Recibir mensaje, especificando un tópico.
-    client.subscribe("mytopic")
+    client.subscribe("entrada")
+    client.subscribe("salida")
     client.on_message = on_message
 
     # Esperar más mensajes.
     try :
         client.loop_forever()
     except KeyboardInterrupt :
-        # Handle the KeyboardInterrupt gracefully.
         pass
 
     # Establecer desconexión.
     client.disconnect()
 
 
+    # MENSAJE DE EJECUCIÓN EXITOSA.
+    function_01()
+
+
     print ("\n\n\n\n")
 
 
-# OTHER FUNCTIONS
-def on_message(client, userdata, message):
-    print(f"Received message '{message.payload.decode()}' on topic '{message.topic}'. UD: {userdata}")
+
+# OTRAS FUNCIONES #
+def on_message ( client , userdata , message ) :
+
+    print ( f"Mensaje: '{message.payload.decode()}' desde '{message.topic}'." )
+
+
+def function_01 ( ) :
+
+    print ("\n\nCentro de comando.")
 
 
 
-# MAIN FUNCTION IMPLEMENTATION
+# IMPLEMENTACIÓN DE FUNCIÓN MAIN #
 if __name__ == "__main__" :
     main()
 
