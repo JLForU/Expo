@@ -9,5 +9,24 @@ Repositorio para trabajo expositivo de MQTT
 4. `python3 publicador.py`
 
 ## Pendiente
-* Complejizar el ejemplo.
-* Implementar HW.
+### TEORÍA
+	- ¿Qué es?
+	- ¿Para qué sirve?
+	- ¿Cómo se usa?
+	- Relación en los modelos de referencia.
+	- Diferencias con otras tecnologías.
+### PRÁCTICA
+	- Explicación de funciones de librería.
+	- Explicación de `on_message`.
+	- Más funciones de librería.
+	- Tema de `+` y `*`.
+### EXPOSICIÓN
+* Parte teórica de MQTT.
+* Parte teórica de publicador-subscriptor.
+* Parte práctica de Python.
+* Parte práctica de contexto.
+* Ejemplo.
+	* Texto.
+	* Topología física.
+	* Topología lógica.
+#### HW
