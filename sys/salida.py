@@ -10,7 +10,7 @@ TOOPICO = "salida"
 
 
 #
-# DECLARACIÓN DE SENSOR DE ENTRADA #
+# DECLARACIÓN DE SENSOR DE SALIDA #
 #
 def main ( ) :
 
@@ -20,18 +20,28 @@ def main ( ) :
     # Establecer conexión.
     cliente.connect ( "localhost" , 1883 )
 
-    # Enviar mensajes.
+    # Recibir mensaje, especificando un tópico.
+    cliente.subscribe ( "centro" )
+
+    # Control de mensajes.
     try :
+
+        # Escuchar.
+        cliente.loop_start()
+
+        # Enviar mensajes.
         while ( True ) :
             funcioon_publicar()
+
     except KeyboardInterrupt :
+
         pass
 
     # Establecer desconexión.
     cliente.disconnect()
 
     # MENSAJE DE EJECUCIÓN EXITOSA.
-    function_01()
+    funcioon_mensajeDesconexioon()
 
 
     print ("\n\n\n\n")
@@ -45,12 +55,12 @@ def funcioon_publicar ( ) :
 
     if pregunta == "1" :
         # Enviar mensaje por medio de un tópico.
-        cliente.publish ( TOOPICO , f"Sensor de {TOOPICO}." )
+        cliente.publish ( TOOPICO , pregunta )
 
 
-def function_01 ( ) :
+def funcioon_mensajeDesconexioon ( ) :
 
-    print ( "\n\nSensor de entrada." )
+    print ( "\n\nSensor de salida apagado." )
 
 
 

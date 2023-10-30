@@ -6,11 +6,11 @@ import paho.mqtt.client as mqtt
 
 # VARIABLES GLOBALES #
 cliente = mqtt.Client()
-TOOPICO = "entrada"
+TOOPICO = "puerta"
 
 
 #
-# DECLARACIÓN DE SENSOR DE ENTRADA #
+# DECLARACIÓN DE PUERTA #
 #
 def main ( ) :
 
@@ -18,7 +18,7 @@ def main ( ) :
 
 
     # Establecer conexión.
-    cliente.connect ( "localhost" , 1883 )
+    cliente.connect ( "localhost", 1883)
 
     # Recibir mensaje, especificando un tópico.
     cliente.subscribe ( "centro" )
@@ -28,11 +28,7 @@ def main ( ) :
     try :
 
         # Escuchar.
-        cliente.loop_start()
-
-        # Enviar mensajes.
-        while ( True ) :
-            funcioon_publicar()
+        cliente.loop_forever()
 
     except KeyboardInterrupt :
 
@@ -52,23 +48,12 @@ def main ( ) :
 # OTRAS FUNCIONES #
 def on_message ( client , userdata , message ) :
 
-    mensaje = message.payload.decode()
-
-    print ( f"\n\nMensaje: '{mensaje}' desde '{message.topic}'." )
-
-
-def funcioon_publicar ( ) :
-
-    pregunta = input ( f"{TOOPICO}: " )
-
-    if pregunta == "1" :
-        # Enviar mensaje por medio de un tópico.
-        cliente.publish ( TOOPICO , pregunta )
+    print ( f"Mensaje: '{message.payload.decode()}' desde '{message.topic}'." )
 
 
 def funcioon_mensajeDesconexioon ( ) :
 
-    print ( "\n\nSensor de entrada apagado." )
+    print ( "\n\nPuerta apagada." )
 
 
 

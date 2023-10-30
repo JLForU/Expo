@@ -1,7 +1,16 @@
 
 # IMPORTACIONES #
+import datetime
 import paho.mqtt.client as mqtt
 
+
+
+# VARIABLES GLOBALES #
+cliente = mqtt.Client()
+TOOPICO = "centro"
+booleano_salaHabilitada = True
+maaximo_personas = 5
+contador_personas = 0
 
 
 #
@@ -13,26 +22,33 @@ def main ( ) :
 
 
     # Establecer conexión.
-    client = mqtt.Client()
-    client.connect ( "localhost", 1883)
+    cliente.connect ( "localhost", 1883)
 
     # Recibir mensaje, especificando un tópico.
-    client.subscribe("entrada")
-    client.subscribe("salida")
-    client.on_message = on_message
+    cliente.subscribe ( "entrada" )
+    cliente.subscribe ( "salida" )
+    cliente.on_message = on_message
 
-    # Esperar más mensajes.
+    # Control de mensajes.
     try :
-        client.loop_forever()
+
+        # Escuchar.
+        cliente.loop_start()
+
+        # Evaluar si la sala está habilitada.
+        while ( True ) :
+
+            funcioon_evaluarSala()
+
     except KeyboardInterrupt :
+
         pass
 
     # Establecer desconexión.
-    client.disconnect()
-
+    cliente.disconnect()
 
     # MENSAJE DE EJECUCIÓN EXITOSA.
-    function_01()
+    funcioon_mensajeDesconexioon()
 
 
     print ("\n\n\n\n")
@@ -42,12 +58,73 @@ def main ( ) :
 # OTRAS FUNCIONES #
 def on_message ( client , userdata , message ) :
 
-    print ( f"Mensaje: '{message.payload.decode()}' desde '{message.topic}'." )
+    mensaje = message.payload.decode()
+    toopico = message.topic
+
+    print ( f"Recibiendo '{mensaje}' desde '{toopico}'." )
+
+    funcioon_calcularPersonas ( toopico )
+
+    funcioon_monitorear ( mensaje , toopico  )
 
 
-def function_01 ( ) :
+def funcioon_calcularPersonas ( topico ) :
 
-    print ("\n\nCentro de comando.")
+    global contador_personas
+    global booleano_salaHabilitada 
+
+    if ( booleano_salaHabilitada == True ) :
+        if ( topico == "entrada" ) :
+            contador_personas += 1
+
+    if ( contador_personas > 0 ) :
+        if ( topico == "salida" ) :
+            contador_personas -= 1
+
+
+def funcioon_monitorear ( mensaje , toopico ) :
+
+    global contador_personas
+    global maaximo_personas
+
+    tiempo = datetime.datetime.now()
+
+    reporte = f"TÓPICO: {toopico}; MENSAJE: {mensaje}; PERSONAS: {contador_personas}; LÍMITE: {maaximo_personas}; TIEMPO: {tiempo}."
+
+    cliente.publish ( "monitor" , reporte )
+
+    archivo = open ( "log" , "a" )
+    archivo.write ( reporte+'\n' )
+    archivo.close()
+
+
+def funcioon_publicar ( mensaje ) :
+
+    print ( f"\nEnviando '{mensaje}' para '{TOOPICO}'.\n" )
+    cliente.publish ( TOOPICO , mensaje )
+
+
+def funcioon_evaluarSala ( ) :
+
+    global contador_personas
+    global maaximo_personas
+    global booleano_salaHabilitada
+
+    booleano_evaluarSala = contador_personas < maaximo_personas
+
+    if ( booleano_evaluarSala != booleano_salaHabilitada ) :
+
+        if ( booleano_salaHabilitada == True ) :
+            funcioon_publicar ( "0" )
+            booleano_salaHabilitada = False
+        else :
+            funcioon_publicar ( "1" )
+            booleano_salaHabilitada = True
+
+
+def funcioon_mensajeDesconexioon ( ) :
+
+    print ( "\n\nCentro de comando apagado." )
 
 
 
