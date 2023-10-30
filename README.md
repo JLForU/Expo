@@ -2,11 +2,11 @@
 Repositorio para trabajo expositivo de MQTT
 
 ## Ejecución
-0. `systemctl status mosquitto`
-1. `cd demo`
-2. `python3 subscriptor.py`
-3. Abrir otra terminal.
-4. `python3 publicador.py`
+0. `sudo systemctl status mosquitto`
+1. Copiar `script.sh` a `<directorio>`.
+2. `cd <directorio>`
+3. `sudo chmod +x script.sh`
+4. `./script.sh`
 
 ## Pendiente
 ### TEORÍA
@@ -30,3 +30,5 @@ Repositorio para trabajo expositivo de MQTT
 	* Topología física.
 	* Topología lógica.
 #### HW
+
+## Imagen expositiva
