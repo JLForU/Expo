@@ -10,22 +10,22 @@ Repositorio para trabajo expositivo de MQTT
 
 ## Pendiente
 ### TEORÍA
-	- ¿Qué es?
-	- ¿Para qué sirve?
-	- ¿Cómo se usa?
-	- Relación en los modelos de referencia.
-	- Diferencias con otras tecnologías.
+ * ¿Qué es?
+ * ¿Para qué sirve?
+ * ¿Cómo se usa?
+ * Relación en los modelos de referencia.
+ * Diferencias con otras tecnologías.
 ### PRÁCTICA
-	- Explicación de funciones de librería.
-	- Explicación de `on_message`.
-	- Más funciones de librería.
-	- Tema de `+` y `*`.
+ * Explicación de funciones de librería.
+ * Explicación de `on_message`.
+ * Más funciones de librería.
+ * Tema de `+` y `*`.
 ### EXPOSICIÓN
-* Parte teórica de MQTT.
-* Parte teórica de publicador-subscriptor.
-* Parte práctica de Python.
-* Parte práctica de contexto.
-* Ejemplo.
+ * Parte teórica de MQTT.
+ * Parte teórica de publicador-subscriptor.
+ * Parte práctica de Python.
+ * Parte práctica de contexto.
+ * Ejemplo.
 	* Texto.
 	* Topología física.
 	* Topología lógica.
