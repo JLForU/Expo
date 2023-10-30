@@ -30,3 +30,5 @@ Repositorio para trabajo expositivo de MQTT
 	* Topología física.
 	* Topología lógica.
 #### HW
+
+![Screenshot](https://github.com/JLForU/SD_Expo/assets/68712197/dc4fdbf5-2c21-4e60-b9e3-9c1d6cfd7805)
