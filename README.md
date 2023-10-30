@@ -33,4 +33,3 @@ Repositorio para trabajo expositivo de MQTT
 
 ## Imagen expositiva
 ![Screenshot](https://github.com/JLForU/SD_Expo/assets/68712197/dc4fdbf5-2c21-4e60-b9e3-9c1d6cfd7805)
->>>>>>> 9e5ae09ce0360d9c879b3ff83361f57c01266dff
